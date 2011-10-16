@@ -1,0 +1,85 @@
+\documentclass{jarticle}
+\title{英語でコミットメッセージを書こう\\ver 1.0}
+\author{同人サークル NP-complete}
+\date{}
+\renewcommand\thefootnote{[\arabic{footnote}]}
+\usepackage{ascmac}
+\begin{document}
+\maketitle
+\newpage
+
+{\bf {\Large ``} }
+{\it GIANT BUG... causing /usr to be deleted... so sorry....
+ issue \#123, issue \#122, issue \#121}
+{\bf {\Large ''} }
+\begin{flushright}
+ -- MrMEEE\footnote{https://github.com/MrMEEE/bumblebee/commit/a047be85247755cdbe0acce6}
+\end{flushright}
+
+\vspace{1in}
+
+{\tt
+\begin{verbatim}
+@@ -348,7 +348,7 @@ case ``$DISTRO'' in
+   ln -s /usr/lib/mesa/ld.so.conf /etc/alternatives/gl_conf
+   rm -rf /etc/alternatives/xorg_extra_modules
+   rm -rf /etc/alternatives/xorg_extra_modules-bumblebee
+-  rm -rf /usr /lib/nvidia-current/xorg/xorg
++  rm -rf /usr/lib/nvidia-current/xorg/xorg
+   ln -s /usr/lib/nvidia-current/xorg
+ /etc/alternatives/xorg_extra_modules-bumblebee
+   ldconfig
+  ;;
+
+\end{verbatim}
+}
+
+\newpage
+\section{まえがき}
+みなさん、github\footnote{https://github.com}使ってますか?
+もちろん使ってますよね!
+githubでコードを公開した瞬間から、あなたはオープンソースのプログラマです。
+
+世界中の誰もがあなたのコードにアクセスすることができます。
+全然知らない国の人があなたのコードに改良を加えて、
+pull requestしてくれるかもしれません。
+
+あなたがコミットメッセージを英語で書いてさえすればね!!!
+
+\subsection{英語でコミットメッセージを書こう}
+英語でコミットメッセージを書こうっていきなり言われても困りますよね。
+多分技術者なら読む方はある程度できると思います。
+たくさん英語のドキュメント読んでますよね?
+
+書く方なんてやったこと無いよって思い込んでませんか?
+実はほとんどの人が英語に近い文章を日々たくさん書いているはずです。
+そうです、コードです。
+
+\subsection{なぜコードは英語で書けるのか}
+言語を覚えたりコードを書く際には言語のドキュメントや他の人が書いたコード
+を大量に読みます。
+コードを大量に読めば、自然とその言語の標準的な命名ルールや、
+定番の変数名に気づくことになるでしょう。
+
+多くの人は、他人のコードを読むことで自然と覚えた英単語を組み合わせ、
+自分のコードを書いているのではないでしょうか?
+ドキュメントを読むことよりも、求められる英語力は低いのではないかと思いま
+す。
+\subsection{同じことをコミットメッセージにも}
+同様にコミットメッセージも、標準的な単語や、
+定番の言い回しなどを列挙さえすれば、
+必要十分なコミットメッセージは簡単に書けるようになりそうです。
+
+この本の目的は、そのような定番を見つけ出し、
+簡単に英語でコミットメッセージを書けるような材料を揃えることです。
+
+\newpage
+\section{調査対象}
+githubで調査対象にしたいリポジトリを探し、{\tt git clone} しておきます。
+もちろんコミットメッセージが英語で書かれているものですが、
+英語ネイティブと非ネイティブ両方を調べたほうがいいかもしれません。
+
+
+\section{単語を調べる}
+
+\end{document}
