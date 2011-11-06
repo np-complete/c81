@@ -4,6 +4,7 @@
 \date{}
 \renewcommand\thefootnote{[\arabic{footnote}]}
 \usepackage{ascmac}
+\usepackage{fancybox}
 \begin{document}
 \maketitle
 \newpage
@@ -72,14 +73,187 @@ pull requestしてくれるかもしれません。
 
 この本の目的は、そのような定番を見つけ出し、
 簡単に英語でコミットメッセージを書けるような材料を揃えることです。
+そして日本人のプロダクトに言語の壁と国境をなくすことです。
 
 \newpage
-\section{調査対象}
-githubで調査対象にしたいリポジトリを探し、{\tt git clone} しておきます。
-もちろんコミットメッセージが英語で書かれているものですが、
-英語ネイティブと非ネイティブ両方を調べたほうがいいかもしれません。
+\section{調査方法}
+リポジトリの調査に使ったスクリプトは全て公開
+\footnote{https://github.com/np-complete/c81}しています。
+まずこのリポジトリをチェックアウトしましょう。
+実際にあなたの好きなプロジェクトを選んで同じ調査を実行することができます。
 
+次に、githubで調査対象にしたいリポジトリを探し、
+{\tt src } ディレクトリにチェックアウトしておきます。
+もちろんコミットメッセージが英語で書かれているものですが、
+英語ネイティブ/非ネイティブ両方を調べたほうがいいかもしれません。
+もちろん、自分が興味を持てるプロジェクトを最優先したほうがいいでしょう。
+
+今回、
+git\footnote{https://github.com/git/git},
+linux\footnote{https://github.com/torvalds/linux},
+ruby\footnote{https://github.com/ruby/ruby},
+rails\footnote{https://github.com/rails/rails},
+jquery\footnote{https://github.com/jquery/jquery},
+node\footnote{https://github.com/joyent/node}
+などを調査対象にしました。
+
+また、git以外のリポジトリでも、
+コミットメッセージさえ取得できれば同じスクリプトで調査ができるはずです。
 
 \section{単語を調べる}
+まず最初にどのような単語がよく使われているかを把握しましょう。
+
+gitでは、
+\begin{quote}
+{\tt \$git log --pretty=\%s\%n\%b\%n}
+\end{quote}
+
+というコマンドでコミットメッセージ部分だけ見ることができます。
+
+このスクリプトを {\tt c81/bin/only-message } に置いてあります。
+次のようにファイルに保存しておくとよいでしょう。
+\begin{quote}
+{\tt \$cd src/rails; ../bin/only-message > ../data/rails-messages }
+\end{quote}
+
+メッセージから余分な文字や記号を削除して、
+単語に分割しやすくするスクリプトが {\tt c81/bin/word-format} です。
+先程の出力をこのスクリプトに通しておきましょう。
+\begin{quote}
+{\tt \$./bin/word-format ./data/rails-messages > ./data/rails-words }
+\end{quote}
+
+これで素のコミットメッセージが単語に分割しやすい形になりました。
+
+
+\subsection{文頭の単語を調べる}
+英語の文章は一番言いたいことを先に書くっていうルールがあります。
+とりあえず文頭の単語を調べてみましょう!
+\begin{quote}
+{\tt \$./bin/first-word ./data/rails-words | ./bin/word-counter > ./data/rails-first-word}
+\end{quote}
+
+
+
+\begin{table}[htbp]
+ \begin{center}
+  \begin{tabular}{c}
+
+   \begin{minipage}{0.3\hsize}
+    \begin{center}
+     \caption{rails の場合}
+     \begin{tabular}{c|c}
+      \hline
+      1670 & fix \\
+      1519 & merge \\
+      1369 & added \\
+      1274 & add \\
+      1030 & fixed \\
+      843 & remove \\
+      683 & make \\
+      632 & use \\
+      532 & this \\
+      456 & update \\
+      339 & ensure \\
+      324 & revert \\
+      311 & move \\
+      303 & don \\
+      282 & allow \\
+      225 & removed \\
+      \hline
+     \end{tabular}
+    \end{center}
+   \end{minipage}
+
+   \begin{minipage}{0.3\hsize}
+    \begin{center}
+     \caption{node の場合}
+     \begin{tabular}{c|c}
+      \hline
+      513 & add \\
+      485 & fix \\
+      216 & upgrade \\
+      205 & remove \\
+      201 & this \\
+      178 & fixes \\
+      99 & http \\
+      96 & use \\
+      90 & the \\
+      89 & - \\
+      84 & bump \\
+      82 & closes \\
+      76 & merge \\
+      66 & revert \\
+      62 & make \\
+      61 & update \\
+      \hline
+     \end{tabular}
+    \end{center}
+   \end{minipage}
+
+
+   \begin{minipage}{0.3\hsize}
+    \begin{center}
+     \caption{jquery の場合}
+     \begin{tabular}{c|c}
+      \hline
+      366 & added \\
+      295 & fixed \\
+      251 & fix \\
+      192 & merge \\
+      189 & jquery \\
+      180 & make \\
+      93 & fixes \\
+      77 & removed \\
+      67 & - \\
+      65 & made \\
+      56 & add \\
+      51 & tagging \\
+      49 & updating \\
+      46 & landing \\
+      43 & more \\
+      41 & updated \\
+      \hline
+     \end{tabular}
+    \end{center}
+   \end{minipage}
+
+  \end{tabular}
+ \end{center}
+\end{table}
+
+ほとんどが動詞ですね!
+さらに3つのプロジェクトで共通して出てくる単語がいくつかあります。
+{\bf fix}, {\bf add}, {\bf remove}, {\bf make}, {\bf update} です。
+これらの単語は以上によく使われる単語だというのがわかりますね。
+
+\subsection{文脈を確認する}
+
+{\bf make} と {\bf update} は少し意味が分かりづらいので文脈を確認します。
+{\tt grep} で抜き出してみましょう。
+
+\begin{quote}
+ {\tt \$ grep -E \textasciicircum make ./data/rails-words }
+\end{quote}
+
+  \subsection{単語数を調べる}
+単語に分割しやすくなったので、単語の数をカウントしましょう。
+これも {\tt c81/bin/word-count} という簡単なスクリプト実行するだけです。
+\begin{quote}
+ {\tt \$./bin/word-count ./data/rails-words > ./data/rails-count }
+\end{quote}
+
+\subsection{結論}
+
+\begin{table}
+ \begin{center}
+  \begin{tabular}{c|c}
+   追加した & add \\
+   削除した & remove \\
+   修正した & fix \\
+  \end{tabular}
+ \end{center}
+\end{table}
+
 
 \end{document}
