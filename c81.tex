@@ -126,134 +126,149 @@ gitでは、
 これで素のコミットメッセージが単語に分割しやすい形になりました。
 
 
-\subsection{文頭の単語を調べる}
-英語の文章は一番言いたいことを先に書くっていうルールがあります。
-とりあえず文頭の単語を調べてみましょう!
-\begin{quote}
-{\tt \$./bin/first-word ./data/rails-words | ./bin/word-counter > ./data/rails-first-word}
-\end{quote}
+  \subsection{文頭の単語を調べる}
+  英語の文章は一番言いたいことを先に書くっていうルールがあります。
+  とりあえず文頭の単語を調べてみましょう!
+  \begin{quote}
+   {\tt \$./bin/first-word ./data/rails-words | ./bin/word-counter > ./data/rails-first-word}
+  \end{quote}
 
 
 
-\begin{table}[htbp]
- \begin{center}
-  \begin{tabular}{c}
+  \begin{table}[htbp]
+   \begin{center}
+    \begin{tabular}{c}
 
-   \begin{minipage}{0.3\hsize}
-    \begin{center}
-     \caption{rails の場合}
-     \begin{tabular}{c|c}
-      \hline
-      1670 & fix \\
-      1519 & merge \\
-      1369 & added \\
-      1274 & add \\
-      1030 & fixed \\
-      843 & remove \\
-      683 & make \\
-      632 & use \\
-      532 & this \\
-      456 & update \\
-      339 & ensure \\
-      324 & revert \\
-      311 & move \\
-      303 & don \\
-      282 & allow \\
-      225 & removed \\
-      \hline
-     \end{tabular}
-    \end{center}
-   \end{minipage}
+     \begin{minipage}{0.3\hsize}
+      \begin{center}
+       \caption{rails の場合}
+       \begin{tabular}{c|c}
+        \hline
+        1670 & fix \\
+        1519 & merge \\
+        1369 & added \\
+        1274 & add \\
+        1030 & fixed \\
+        843 & remove \\
+        683 & make \\
+        632 & use \\
+        532 & this \\
+        456 & update \\
+        339 & ensure \\
+        324 & revert \\
+        311 & move \\
+        303 & don \\
+        282 & allow \\
+        225 & removed \\
+        \hline
+       \end{tabular}
+      \end{center}
+     \end{minipage}
 
-   \begin{minipage}{0.3\hsize}
-    \begin{center}
-     \caption{node の場合}
-     \begin{tabular}{c|c}
-      \hline
-      513 & add \\
-      485 & fix \\
-      216 & upgrade \\
-      205 & remove \\
-      201 & this \\
-      178 & fixes \\
-      99 & http \\
-      96 & use \\
-      90 & the \\
-      89 & - \\
-      84 & bump \\
-      82 & closes \\
-      76 & merge \\
-      66 & revert \\
-      62 & make \\
-      61 & update \\
-      \hline
-     \end{tabular}
-    \end{center}
-   \end{minipage}
-
-
-   \begin{minipage}{0.3\hsize}
-    \begin{center}
-     \caption{jquery の場合}
-     \begin{tabular}{c|c}
-      \hline
-      366 & added \\
-      295 & fixed \\
-      251 & fix \\
-      192 & merge \\
-      189 & jquery \\
-      180 & make \\
-      93 & fixes \\
-      77 & removed \\
-      67 & - \\
-      65 & made \\
-      56 & add \\
-      51 & tagging \\
-      49 & updating \\
-      46 & landing \\
-      43 & more \\
-      41 & updated \\
-      \hline
-     \end{tabular}
-    \end{center}
-   \end{minipage}
-
-  \end{tabular}
- \end{center}
-\end{table}
-
-ほとんどが動詞ですね!
-さらに3つのプロジェクトで共通して出てくる単語がいくつかあります。
-{\bf fix}, {\bf add}, {\bf remove}, {\bf make}, {\bf update} です。
-これらの単語は以上によく使われる単語だというのがわかりますね。
-
-\subsection{文脈を確認する}
-
-{\bf make} と {\bf update} は少し意味が分かりづらいので文脈を確認します。
-{\tt grep} で抜き出してみましょう。
-
-\begin{quote}
- {\tt \$ grep -E \textasciicircum make ./data/rails-words }
-\end{quote}
-
-  \subsection{単語数を調べる}
-単語に分割しやすくなったので、単語の数をカウントしましょう。
-これも {\tt c81/bin/word-count} という簡単なスクリプト実行するだけです。
-\begin{quote}
- {\tt \$./bin/word-count ./data/rails-words > ./data/rails-count }
-\end{quote}
-
-\subsection{結論}
-
-\begin{table}
- \begin{center}
-  \begin{tabular}{c|c}
-   追加した & add \\
-   削除した & remove \\
-   修正した & fix \\
-  \end{tabular}
- \end{center}
-\end{table}
+     \begin{minipage}{0.3\hsize}
+      \begin{center}
+       \caption{node の場合}
+       \begin{tabular}{c|c}
+        \hline
+        513 & add \\
+        485 & fix \\
+        216 & upgrade \\
+        205 & remove \\
+        201 & this \\
+        178 & fixes \\
+        99 & http \\
+        96 & use \\
+        90 & the \\
+        89 & - \\
+        84 & bump \\
+        82 & closes \\
+        76 & merge \\
+        66 & revert \\
+        62 & make \\
+        61 & update \\
+        \hline
+       \end{tabular}
+      \end{center}
+     \end{minipage}
 
 
+     \begin{minipage}{0.3\hsize}
+      \begin{center}
+       \caption{jquery の場合}
+       \begin{tabular}{c|c}
+        \hline
+        366 & added \\
+        295 & fixed \\
+        251 & fix \\
+        192 & merge \\
+        189 & jquery \\
+        180 & make \\
+        93 & fixes \\
+        77 & removed \\
+        67 & - \\
+        65 & made \\
+        56 & add \\
+        51 & tagging \\
+        49 & updating \\
+        46 & landing \\
+        43 & more \\
+        41 & updated \\
+        \hline
+       \end{tabular}
+      \end{center}
+     \end{minipage}
+
+    \end{tabular}
+   \end{center}
+  \end{table}
+
+  ほとんどが動詞ですね!
+  さらに3つのプロジェクトで共通して出てくる単語がいくつかあります。
+  {\bf fix}, {\bf add}, {\bf remove}, {\bf make}, {\bf update} です。
+  これらの単語は異常によく使われる単語だというのがわかりますね。
+
+   \subsubsection{文脈を確認する}
+
+   {\bf make} と {\bf update} は少し意味が分かりづらいので文脈を確認します。
+   {\tt grep} で抜き出してみましょう。
+
+   \begin{quote}
+    {\tt \$ grep -E \textasciicircum make ./data/rails-words }
+   \end{quote}
+
+   例えばこんな文章が出てきます。
+   \begin{quote}
+    {\bf make} all tests pass on pgsql \#1759 rick olson\\
+    {\bf make} sure that we get back a soapstring when \$kcode is utf-8\\
+    {\bf make} request\#subdomains handle foo foo com correctly\\
+   \end{quote}
+   どうやらナニナニをチョメチョメな状態にするという意味のようです。
+
+   同様にupdateも調べてみました。
+   どうやらupdateは
+   {\bf makeと同じような使い方{\footnote{例) update jquery data to use jquery noop for tojson hack instead of an additional superfluous function}}} や
+   {\bf 関連ライブラリをupdateした{\footnote{例) update to prototype 1 5
+   0 }}} など様々な意味で使われているようでした。
+   {\bf make} と {\bf update} の微妙なニュアンスの違いはよく分かりません
+   が、{\bf make} は能動的、 {\bf update} は受動的な使われ方のような気が
+   します。
+
+  \subsubsection{まとめ}
+  自分がやったことを表現するには次の単語を文頭に使うと良い。
+  \begin{table}[htbp]
+   \begin{center}
+    \begin{tabular}{ll}
+     fix & バグを修正した \\
+     add & 機能やファイルを追加した \\
+     remove & 機能やファイルを削除した \\
+     make & 変更した(動作が明確に変わるとき) \\
+     update & 更新した(外部ライブラリやドキュメント) \\
+    \end{tabular}
+   \end{center}
+  \end{table}
+
+  削除や変更という単語で、一番最初に思い浮かびそうな {\bf delete} や {\bf change} は、
+  実はあまり使われていない。
+
+ \subsection{全ての単語を調べる}
 \end{document}
