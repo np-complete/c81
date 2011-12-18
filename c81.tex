@@ -267,5 +267,99 @@ gitでは、
   削除や変更という単語で、一番最初に思い浮かびそうな {\bf delete} や {\bf change} は、
   実はあまり使われていない。
 
- \subsection{全ての単語を調べる}
+  \subsection{目的語を調べる}
+  前節で文頭に特徴的な動詞が多いことが分かりました。
+  次は何を~に当たる部分の特徴を探しましょう。
+  前節で使った頭単語検索を使い、2-4語目を抜き出してみましょう。
+
+   \begin{quote}
+    {\tt \$./bin/grep-first fix ./data/ruby-words | cut -f2,3,4 -d ' ' | ./bin/counter }
+   \end{quote}
+
+   \subsubsection{fix}
+   修正対象の表現として、
+   {\bf typo}\footnote{rubyはtypoの割合が圧倒的に多い} や
+   {\bf bug}, {\bf error}, {\bf problem},
+   {\bf issue}\footnote{BTSのチケット番号を添える場合に使うことが多い}
+   などが使われています。
+
+   {\bf fix variable name}や、
+   {\bf fix memory leak} などのように問題の原因を直接書くことも
+   あります。
+
+   名詞を修飾する語として、
+   {\bf fix wrong class name} や {\bf fix wrong test} のように
+   {\bf wrong}が使われることが多いようです。
+
+   \subsubsection{add}
+   {\bf test}, {\bf document}, {\bf comment}などがよく追加されるようです
+   \footnote{どのプロジェクトも機能追加よりテストやドキュメントの追加の
+   ほうが多いようです}。
+   最もたくさん追加されているはずなのに、
+   {\bf bug}という語が見つかることはないでしょう。
+   また、新規のファイルを追加しても、
+   {\bf add file}のような使い方はしないようです。
+
+   新しい機能の追加には
+   {\bf method}, {\bf function}, {\bf process}, {\bf code}
+   などが使われ、
+   直接メソッド名を書く方法もあります。
+   あまり{\bf feature}という語は使われないようです。
+   既存メソッドの機能追加も {\bf add option} や {\bf add parameter} などで、
+   addを使って表現する場合もあります。
+
+   プラットフォームやデバイスやOSへの対応は{\bf add support}で表現されま
+   す。
+
+   \subsubsection{remove}
+   基本的に{\bf add}できるものは、当然{\bf remove}にも使えます
+   \footnote{ただし一番消されるのは残念ながらsupportのようです}。
+   削除の理由を表すために、{\bf unused}, {\bf unnecessary},
+   {\bf extra}, {\bf duplicated} などの修飾子を使います。
+
+   修飾対象の名詞には、addで使われるものよりも、
+   {\bf variable}, {\bf method}, {\bf file}, {\bf code}などを使って
+   もっと限定的に削除箇所を表現します。
+
+   単純に空行の削除や空ディレクトリの削除には、
+   {\bf empty line} や {\bf empty directory} などが使われます。
+
+   \subsubsection{make}
+   makeは圧倒的に慣用句表現が多く見られます。
+   {\bf make sure that ...} や {\bf make it ... to} のような表現です。
+
+   ここで特徴的なのは、ほとんどが{\bf make sure}なjqeryに比べて、
+   rubyには1度しか使われておらず、そもそも{\bf make}の使用回数も少ないところです。
+   railsにも{\bf make sure}が多いところを見ると、
+   非英語ネイティブは{\bf make}の使い方が上手くないのかもしれません
+   \footnote{matzはrubykaigiで通訳を務めるくらいの英語能力なので単純に好
+   みの問題の可能性もあります}。
+   {\bf make sure}を上手く使いこなすことでカッコよくコミットしましょう!
+
+   \subsubsection{update}
+   {\bf document}や{\bf test}など{\bf add}と同じものが似たような意味で使われる
+   ようです。
+   {\bf fix}でもなく{\bf add}でもなく{\bf update}という微妙な雰囲気を感
+   じ取ってください。
+
+   それ以外にも{\bf version}などの数値を上げるときにも使います。
+
+  \subsection{おまけ}
+  単語数をカウントしてみると今まで見たこともない単語が見つかることがあり
+  ます。
+
+  例えばrubyのコミットメッセージには約4000回 {\bf ditto} という単語が出
+  てきますが、こんな単語見たことありますか?
+  どうやら調べてみると「同上」という意味で、
+\begin{verbatim}
+* vm.c (rb_vm_rewrite_dfp_in_errinfo): change return type to suppress a warning.
+* vm_core.h: ditto.
+\end{verbatim}
+  のように使うようです。
+
+  他のプロジェクトを調べてみるとlinuxで46回、railsで2回。
+  全く使われないわけではないけれどほとんど使われないような単語が、
+  rubyでは4000回も使われるという点で、
+  コミットの語彙にも文化があると言えるのではないでしょうか。
+
 \end{document}
