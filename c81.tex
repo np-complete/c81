@@ -362,4 +362,72 @@ gitでは、
   rubyでは4000回も使われるという点で、
   コミットの語彙にも文化があると言えるのではないでしょうか。
 
+ \section{内容を説明する}
+ コミット内容から、動詞と目的語は簡単に決めることができるはずです。
+ しかし、ほとんどの場合は、もっと具体的な内容を書かないといけませんね。
+
+ もちろんこの行為は非常に高い英語力を求められます。
+ さてどうしましょう?
+
+  \subsection{パクる}
+  既存のコミットメッセージをパクりましょう!
+  {\bf grep}を駆使して似たようなコミットを探すのです。
+
+  例えば、ss\_editor\footnote{https://github.com/np-complete/ss\_editor} の
+  コミット 92f6b8a92\footnote{https://github.com/np-complete/ss\_editor/commit/92f6b8a92ec938e6f74d919b52e3ba3cb2e73a4d}
+  を英語にしてみましょう。
+  このコミットの内容は、{\tt before\_filter} にストーリーの所有者である
+  ことを確認する処理を追加するというものです。
+
+  まず動詞は当然 {\bf add} を使えばいいでしょう。
+  目的語はとりあえず {\bf filter} を想定してgrepしてみます。
+  パクり元のプロジェクトとして、最も有名なRailsアプリケーションの
+  ひとつであるRedmine\footnote{https://github.com/edavis10/redmine} を使
+  います。
+  \begin{quote}
+   {\tt \$grep -i add data/redmine-message | grep -i filter }
+  \end{quote}
+  どうやら出てくるのはほぼSQLの条件設定の話ばかりで参考になりません。
+
+  次に {\bf permission} を思いついたので検索してみます。
+  \begin{quote}
+   {\tt \$grep -i add data/redmine-message | grep -i permission }
+  \end{quote}
+
+  今回のはかなりイイ線いったメッセージが出てきます。
+  例えば、
+  \begin{quote}
+   {\tt Adds permissions to let users edit and/or delete their messages }
+  \end{quote}
+  なんかいい感じですね。
+  これを参考に書いてみましょう。
+  \begin{quote}
+   {\tt add permission to let users access only their own stories }
+  \end{quote}
+  なんてどうでしょう?
+
+  制限が増えてるのに {\tt add permission} は少しおかしいので、
+  別の候補も探しましょう。{\bf check} で調べてみることにしましょう。
+
+  \begin{quote}
+   {\tt Add etag check on the activity view to avoid rendering when not
+   modified.}
+  \end{quote}
+  これ良いですね、パクりましょう!
+   \begin{quote}
+    {\tt add permission check on the stories\_controller.rb to avoid accessing when not own.}
+   \end{quote}
+   {\tt when not own.}の部分にまだ違和感がありますが、こっちのほうがシックリきますね!!
+
+  \subsection{前置詞}
+  自信を持って英語を書けない一番のポイントが前置詞ではないでしょうか?
+  inとonの違いとか分かりますか? 全然分かりませんよね。
+
+  色々調べてみたところネイティブの人たちも結構適当に使っているようでした。
+  常識的におかしくない使い方なら大丈夫でしょう。
+  {\tt test for}だけはお決まりらしいのでおさえておきましょう!
+
+  \subsection{まとめ}
+  スラスラ書けるようになるには、リアル英語力が必要そうです。 orz\\
+  ううむ、この本の存在意義とは \dots
 \end{document}
