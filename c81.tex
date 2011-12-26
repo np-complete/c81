@@ -1,14 +1,22 @@
 \documentclass{jarticle}
-\title{英語でコミットメッセージを書こう\\ver 1.0}
+\title{英語でコミットメッセージを書こう}
 \author{同人サークル NP-complete}
-\date{}
+\date{2011/12/31\\コミックマーケット81}
 \renewcommand\thefootnote{[\arabic{footnote}]}
 \usepackage{ascmac}
 \usepackage{fancybox}
-\begin{document}
-\maketitle
-\newpage
 
+
+\begin{document}
+\Huge
+\maketitle
+\normalsize
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+\-
+\newpage
+\section*{伝説のコミット}
 {\bf {\Large ``} }
 {\it GIANT BUG... causing /usr to be deleted... so sorry....
  issue \#123, issue \#122, issue \#121}
@@ -352,7 +360,8 @@ gitでは、
   てきますが、こんな単語見たことありますか?
   どうやら調べてみると「同上」という意味で、
 \begin{verbatim}
-* vm.c (rb_vm_rewrite_dfp_in_errinfo): change return type to suppress a warning.
+* vm.c (rb_vm_rewrite_dfp_in_errinfo): change return type
+   to suppress a warning.
 * vm_core.h: ditto.
 \end{verbatim}
   のように使うようです。
@@ -362,6 +371,7 @@ gitでは、
   rubyでは4000回も使われるという点で、
   コミットの語彙にも文化があると言えるのではないでしょうか。
 
+  \newpage
  \section{内容を説明する}
  コミット内容から、動詞と目的語は簡単に決めることができるはずです。
  しかし、ほとんどの場合は、もっと具体的な内容を書かないといけませんね。
@@ -384,11 +394,14 @@ gitでは、
   パクり元のプロジェクトとして、最も有名なRailsアプリケーションの
   ひとつであるRedmine\footnote{https://github.com/edavis10/redmine} を使
   います。
+
+  \subsubsection{全然ダメだった}
   \begin{quote}
    {\tt \$grep -i add data/redmine-message | grep -i filter }
   \end{quote}
   どうやら出てくるのはほぼSQLの条件設定の話ばかりで参考になりません。
 
+  \subsubsection{かなり近づいてきた}
   次に {\bf permission} を思いついたので検索してみます。
   \begin{quote}
    {\tt \$grep -i add data/redmine-message | grep -i permission }
@@ -406,6 +419,7 @@ gitでは、
   \end{quote}
   なんてどうでしょう?
 
+  \subsubsection{これならどうだ}
   制限が増えてるのに {\tt add permission} は少しおかしいので、
   別の候補も探しましょう。{\bf check} で調べてみることにしましょう。
 
@@ -535,4 +549,13 @@ gitでは、
    発行日\\
    2011/12/31
   \end{center}
+  \newpage
+  \thispagestyle{empty}
+  \-
+  \newpage
+  \begin{flushright}
+   \-
+  \end{flushright}
+
+  \thispagestyle{empty}
 \end{document}
