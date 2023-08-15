@@ -1,0 +1,19 @@
+name: deploy
+on:
+  pull_request_target:
+    types: closed
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker run -v .:/src -w /src vvakame/review:5.8 make all
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::009775665146:role/publish-np-complete-book-role
+          aws-region: us-west-2
+      - run: aws s3 cp c81.pdf s3://np-complete-books/pdf/C81.pdf --acl public-read
