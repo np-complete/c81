@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker run -v .:/src -w /src vvakame/review:5.8 make all
-      - uses: aws-actions/configure-aws-credentials@v2
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::009775665146:role/publish-np-complete-book-role
           aws-region: us-west-2
